@@ -1,0 +1,9 @@
+--- 
+- name: Disable swap
+  command: swapoff -a 
+- name: comment line of swap if found
+  replace:
+    regexp: '^/swapfile'
+    path: /etc/fstab
+    replace: '#swapfile'
+#shell: sudo sed -i '/swap / s/^\(.*\)$/#\1/g' /etc/fstab

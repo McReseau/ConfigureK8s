@@ -1,5 +1,0 @@
-[master]
-master.viannijeu.cm
-
-[worker]
-worker-node[1:2].viannijeu.cm

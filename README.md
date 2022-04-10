@@ -1,4 +1,4 @@
-#Ansible project to setup a k8s cluster
+#Ansible project to setup a k8s cluster#
 This ansible program is used to configure a kubernetes cluster (01 master and two worker nodes).
 If you want more node, edit inventory file and add the new node (fqdn) in the appropriate group.
 Container Runtime used: containerd

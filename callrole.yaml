@@ -1,0 +1,14 @@
+---
+- name: K8s Cluster configuration
+  hosts: all
+  ignore_errors: yes
+  roles:
+    - k8s
+- name: apply network
+  hosts: master
+  become: False
+  remote_user: automation
+  tasks:
+  - name: configuring of cluster network 
+    command: kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+

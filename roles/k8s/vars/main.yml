@@ -1,0 +1,18 @@
+---
+verionk8s: 1.23.0
+simple_packages:
+  - name: containerd
+  - name: apt-transport-https
+  - name: curl 
+packages_k8s:
+  - name: kubelet
+    version: 1.23.0-00
+  - name: kubeadm
+    version: 1.23.0-00 
+  - name: kubectl 
+    version: 1.23.0-00
+repository_key_k8s: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+repository_deb_k8s: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+network_address_pod: "192.168.0.0/16"
+username: "automation"
+calico_github: "https://docs.projectcalico.org/manifests/calico.yaml"

@@ -1,0 +1,30 @@
+---
+- name: Ensure containerd.conf exist
+  file:
+    path: /etc/modules-load.d/containerd.conf
+    state: touch
+- name: loading overlay module 
+  lineinfile:
+    path: /etc/modules-load.d/containerd.conf
+    line: overlay
+    state: present
+- name: loading br_netfilter module 
+  lineinfile:
+    path: /etc/modules-load.d/containerd.conf
+    line: br_netfilter
+    state: present
+- name: loading module with modprobe
+  shell: "modprobe overlay && modprobe br_netfilter"
+- name: Ensure kubernetes file exist
+  file:
+    path: /etc/sysctl.d/99-kubernetes-cri.conf
+    state: touch
+- name: Loading new lines
+  copy:
+    content: |
+       net.bridge.bridge-nf-call-iptables = 1
+       net.ipv4.ip_forward = 1
+       net.bridge.bridge-nf-call-ip6tables = 1
+    dest: /etc/sysctl.d/99-kubernetes-cri.conf
+- name: validate all modules configuration
+  command: "sysctl --system"

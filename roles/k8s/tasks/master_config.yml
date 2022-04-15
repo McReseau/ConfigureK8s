@@ -2,10 +2,13 @@
 - name: Configure network range for pod 
   command: kubeadm init --pod-network-cidr {{ network_address_pod }} --kubernetes-version {{ verionk8s }}
   when: node_role == "master"
-#- name: configuring of cluster network 
-#  command: kubectl apply -f {{ calico_github }} #https://docs.projectcalico.org/manifests/calico.yaml
+- name: configuring of cluster network 
+  become: False
+  remote_user: automation
+  command: kubectl apply -f {{ calico_github }} #https://docs.projectcalico.org/manifests/calico.yaml
   when: node_role  == "master"
 - name: generate command to join cluster 
+  become: True
   shell: kubeadm token create --print-join-command > /joincluster.txt
   when: node_role  == "master"
 - name: Ensure that .kube directory exists
